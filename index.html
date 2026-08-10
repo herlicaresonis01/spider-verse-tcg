@@ -10,34 +10,40 @@
 </head>
 <body>
     <header id="top-bar">
-        <div class="currency">🕸️ <span id="web-fragments">150</span></div>
-        <h1 class="app-title">HÉRITAGE</h1>
+        <div class="currency-badge">🕸️ <span id="web-fragments">150</span></div>
+        <h1 class="app-title">SPIDER-VERSE</h1>
     </header>
 
     <main id="app-content">
-        <!-- ÉCRAN COLLECTION -->
+        <!-- SECTION COLLECTION -->
         <section id="collection" class="screen active">
-            <h2>Collection de Cartes</h2>
-            <div id="collection-grid" class="grid-container"></div>
+            <div class="screen-header">
+                <h2>Collection Multivers</h2>
+                <span id="collection-count" class="counter">0 / 7</span>
+            </div>
+            <div id="collection-grid" class="cards-grid"></div>
         </section>
 
-        <!-- ÉCRAN COMBAT -->
+        <!-- SECTION COMBAT -->
         <section id="combat" class="screen">
-            <h2>Arène Multivers</h2>
-            <div id="battlefield">
-                <p class="placeholder-text">Mode combat en cours de déploiement...</p>
+            <h2>Arène des Dimensions</h2>
+            <div class="arena-card">
+                <p>Affrontez les menaces du Multivers avec vos meilleurs tisseurs.</p>
+                <button class="marvel-btn secondary" onclick="alert('Le mode Arène arrive dans la prochaine mise à jour de combat !')">Lancer un Duel</button>
             </div>
         </section>
 
-        <!-- ÉCRAN QUÊTES / BOOSTERS -->
+        <!-- SECTION BOUTIQUE & BOOSTERS -->
         <section id="quests" class="screen">
-            <h2>Boutique & Quêtes</h2>
-            <div class="booster-pack">
-                <h3>Booster Multivers</h3>
-                <p>Contient 3 cartes aléatoires</p>
-                <button id="open-booster-btn" onclick="openBooster()">Ouvrir (100 🕸️)</button>
+            <h2>Quartier Général</h2>
+            <div class="booster-card-container">
+                <div class="booster-banner">
+                    <h3>Booster Légendaire</h3>
+                    <p>3 cartes aléatoires garanties (Chance de Gold !)</p>
+                </div>
+                <button class="marvel-btn primary" onclick="openBooster()">Ouvrir un Booster (100 🕸️)</button>
             </div>
-            <div id="booster-result" class="booster-result"></div>
+            <div id="booster-result" class="booster-result-container"></div>
         </section>
     </main>
 
@@ -47,10 +53,10 @@
             <span class="icon">🎴</span><span>Cartes</span>
         </button>
         <button class="nav-btn" onclick="switchTab('combat', this)">
-            <span class="icon">⚔️</span><span>Combat</span>
+            <span class="icon">⚔️</span><span>Arène</span>
         </button>
         <button class="nav-btn" onclick="switchTab('quests', this)">
-            <span class="icon">📜</span><span>Boutique</span>
+            <span class="icon">⚡</span><span>QG</span>
         </button>
     </nav>
 
