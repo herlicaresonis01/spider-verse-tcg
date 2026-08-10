@@ -6,12 +6,13 @@
 }
 
 body { 
-    background-color: #0d1117; 
+    background-color: #050508; 
     color: #ffffff; 
     overflow: hidden; 
     display: flex; 
     flex-direction: column; 
     height: 100vh; 
+    background-image: radial-gradient(circle at 50% 10%, #1a0b2e 0%, #050508 70%);
 }
 
 header { 
@@ -19,31 +20,36 @@ header {
     justify-content: space-between; 
     align-items: center; 
     padding: 15px 20px; 
-    background: #161b22; 
-    border-bottom: 1px solid #30363d;
+    background: rgba(13, 17, 23, 0.85); 
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid #e23636;
     z-index: 10;
 }
 
-.currency { 
-    background: rgba(255, 255, 255, 0.1); 
-    padding: 6px 12px; 
+.currency-badge { 
+    background: linear-gradient(135deg, rgba(0, 210, 255, 0.2), rgba(0, 100, 255, 0.2)); 
+    border: 1px solid #00d2ff;
+    padding: 6px 14px; 
     border-radius: 20px; 
     color: #00d2ff; 
-    font-weight: bold;
+    font-weight: 800;
     font-size: 0.9rem;
+    box-shadow: 0 0 10px rgba(0, 210, 255, 0.2);
 }
 
 .app-title { 
-    font-size: 1.1rem; 
-    letter-spacing: 2px; 
+    font-size: 1.2rem; 
+    letter-spacing: 3px; 
     color: #e23636; 
+    font-weight: 900;
+    text-shadow: 0 0 10px rgba(226, 54, 54, 0.5);
 }
 
 main { 
     flex-grow: 1; 
     overflow-y: auto; 
-    padding: 15px;
-    padding-bottom: 100px; 
+    padding: 20px;
+    padding-bottom: 110px; 
 }
 
 .screen { 
@@ -52,107 +58,171 @@ main {
 
 .screen.active { 
     display: block; 
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.screen-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #21262d;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
 }
 
 h2 {
     font-size: 1.3rem;
-    margin-bottom: 15px;
-    color: #c9d1d9;
-    border-bottom: 1px solid #30363d;
-    padding-bottom: 8px;
+    color: #f0f6fc;
 }
 
-/* Grille des cartes */
-.grid-container {
+.counter {
+    background: #21262d;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    color: #8b949e;
+}
+
+/* Grille et Cartes */
+.cards-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 15px;
 }
 
 .card {
-    background: #161b22;
-    border-radius: 10px;
-    padding: 12px;
-    border: 2px solid #30363d;
+    background: linear-gradient(145deg, #161b22, #0d1117);
+    border-radius: 14px;
+    padding: 16px 12px;
     text-align: center;
     position: relative;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    border: 2px solid #30363d;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+    transition: transform 0.2s;
 }
 
 .card.locked {
-    opacity: 0.4;
-    filter: grayscale(1);
+    opacity: 0.35;
+    filter: grayscale(100%);
+    border-color: #21262d;
 }
 
 .card.common { border-color: #8b949e; }
-.card.rare { border-color: #58a6ff; }
-.card.gold { border-color: #f0883e; box-shadow: 0 0 12px rgba(240, 136, 62, 0.4); }
+.card.rare { border-color: #58a6ff; box-shadow: 0 0 12px rgba(88, 166, 255, 0.25); }
+.card.gold { 
+    border-color: #f0883e; 
+    background: linear-gradient(145deg, #1f1a17, #0d1117);
+    box-shadow: 0 0 20px rgba(240, 136, 62, 0.4); 
+}
 
 .card h4 {
     font-size: 0.95rem;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    color: #ffffff;
+    font-weight: 700;
 }
 
 .card .stats {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: #8b949e;
-    margin-top: 5px;
+    margin-top: 4px;
+    font-weight: 600;
 }
 
-/* Boutique / Boosters */
-.booster-pack {
-    background: #161b22;
-    border: 1px solid #30363d;
+.rarity-tag {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.05);
+}
+
+/* Boutons & Éléments Marvel */
+.marvel-btn {
+    border: none;
+    padding: 14px 20px;
+    font-size: 1rem;
+    font-weight: 800;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.marvel-btn.primary {
+    background: linear-gradient(135deg, #e23636, #b31414);
+    color: white;
+    border: 1px solid #ff6b6b;
+}
+
+.marvel-btn.secondary {
+    background: linear-gradient(135deg, #238636, #196127);
+    color: white;
+    border: 1px solid #2ea043;
+    margin-top: 15px;
+}
+
+.booster-card-container {
+    background: linear-gradient(145deg, #161b22, #0d1117);
+    border: 2px solid #e23636;
     padding: 20px;
-    border-radius: 12px;
+    border-radius: 16px;
     text-align: center;
+    box-shadow: 0 8px 20px rgba(226, 54, 54, 0.15);
+}
+
+.booster-banner h3 {
+    color: #ff7b72;
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+}
+
+.booster-banner p {
+    font-size: 0.8rem;
+    color: #8b949e;
     margin-bottom: 20px;
 }
 
-.booster-pack h3 {
-    margin-bottom: 5px;
-    color: #ff7b72;
+.arena-card {
+    background: #161b22;
+    border: 2px solid #30363d;
+    padding: 25px;
+    border-radius: 16px;
+    text-align: center;
 }
 
-.booster-pack p {
-    font-size: 0.85rem;
+.arena-card p {
     color: #8b949e;
-    margin-bottom: 15px;
+    font-size: 0.9rem;
 }
 
-.booster-pack button {
-    background-color: #238636;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 100%;
-}
-
-.booster-result {
+.booster-result-container {
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.placeholder-text {
-    color: #8b949e;
-    text-align: center;
-    margin-top: 30px;
-}
-
-/* Navigation */
+/* Navigation Basse */
 nav { 
     position: fixed; 
     bottom: 0; 
     width: 100%; 
-    background: #161b22; 
+    background: rgba(13, 17, 23, 0.95); 
+    backdrop-filter: blur(12px);
     display: flex; 
     justify-content: space-around; 
-    padding: 10px 0; 
+    padding: 12px 0; 
     border-top: 1px solid #30363d;
     z-index: 10;
 }
@@ -164,14 +234,16 @@ nav {
     display: flex; 
     flex-direction: column; 
     align-items: center; 
-    font-size: 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 600;
 }
 
 .nav-btn .icon {
-    font-size: 1.3rem;
-    margin-bottom: 2px;
+    font-size: 1.4rem;
+    margin-bottom: 3px;
 }
 
 .nav-btn.active { 
     color: #00d2ff; 
+    text-shadow: 0 0 8px rgba(0, 210, 255, 0.4);
 }
