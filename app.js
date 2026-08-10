@@ -1,4 +1,3 @@
-// Données du jeu & Cartes
 let webFragments = 150;
 
 const cardsDB = [
@@ -11,10 +10,8 @@ const cardsDB = [
     { id: 7, name: "Doctor Octopus", rarity: "rare", attack: 17, defense: 19 }
 ];
 
-// État de la collection du joueur (IDs possédés)
-let playerCollection = [1, 5]; // Possède Tobey et Gwen au début
+let playerCollection = [1, 5]; // Possède Tobey et Gwen au démarrage
 
-// Navigation entre les onglets
 function switchTab(tabId, btn) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(tabId).classList.add('active');
@@ -22,12 +19,11 @@ function switchTab(tabId, btn) {
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    if(tabId === 'collection') {
+    if (tabId === 'collection') {
         renderCollection();
     }
 }
 
-// Affichage de la collection
 function renderCollection() {
     const grid = document.getElementById('collection-grid');
     grid.innerHTML = '';
@@ -39,51 +35,60 @@ function renderCollection() {
         
         cardDiv.innerHTML = `
             <h4>${isOwned ? card.name : "???"}</h4>
-            <div class="stats">${isOwned ? `ATK: ${card.attack} | DEF: ${card.defense}` : "Non débloqué"}</div>
-            <div class="stats" style="text-transform:uppercase; font-size:0.7rem; margin-top:4px;">[${card.rarity}]</div>
+            <div class="stats">${isOwned ? `ATK: ${card.attack} | DEF: ${card.defense}` : "🔒 Verrouillé"}</div>
+            <div class="rarity-tag" style="color: ${card.rarity === 'gold' ? '#f0883e' : card.rarity === 'rare' ? '#58a6ff' : '#8b949e'}">${card.rarity}</div>
         `;
         grid.appendChild(cardDiv);
     });
 
     document.getElementById('web-fragments').innerText = webFragments;
+    document.getElementById('collection-count').innerText = `${playerCollection.length} / ${cardsDB.length}`;
 }
 
-// Système d'ouverture de booster
 function openBooster() {
     if (webFragments < 100) {
-        alert("Pas assez de Fragments de Toile !");
+        alert("Fragments de Toile insuffisants !");
         return;
     }
 
     webFragments -= 100;
     document.getElementById('web-fragments').innerText = webFragments;
 
-    // Tirer 3 cartes aléatoires
     let pulledCards = [];
     for (let i = 0; i < 3; i++) {
-        const randomIndex = Math.floor(Math.random() * cardsDB.length);
-        const card = cardsDB[randomIndex];
-        pulledCards.push(card);
-        if (!playerCollection.includes(card.id)) {
-            playerCollection.push(card.id);
+        const randomCard = cardsDB[Math.floor(Math.random() * cardsDB.length)];
+        pulledCards.push(randomCard);
+        if (!playerCollection.includes(randomCard.id)) {
+            playerCollection.push(randomCard.id);
         }
     }
 
-    // Afficher le résultat
     const resultDiv = document.getElementById('booster-result');
-    resultDiv.innerHTML = `<h3 style="margin:15px 0 10px 0; color:#58a6ff;">Cartes obtenues :</h3>`;
+    resultDiv.innerHTML = `<h3 style="color:#58a6ff; font-size:1rem; margin-bottom:10px;">✨ Résultats du Booster :</h3>`;
+    
+    let subGrid = document.createElement('div');
+    subGrid.className = 'cards-grid';
     
     pulledCards.forEach(c => {
-        resultDiv.innerHTML += `
-            <div class="card ${c.rarity}" style="margin-bottom: 8px;">
+        subGrid.innerHTML += `
+            <div class="card ${c.rarity}">
                 <h4>${c.name}</h4>
-                <div class="stats">ATK: ${c.attack} | DEF: ${c.defense} - [${c.rarity}]</div>
+                <div class="stats">ATK: ${c.attack} | DEF: ${c.defense}</div>
+                <div class="rarity-tag" style="color: ${c.rarity === 'gold' ? '#f0883e' : cardRarityColor(c.rarity)}">${c.rarity}</div>
             </div>
         `;
     });
+    
+    resultDiv.appendChild(subGrid);
+    renderCollection();
 }
 
-// Initialisation au chargement
+function cardRarityColor(rarity) {
+    if(rarity === 'gold') return '#f0883e';
+    if(rarity === 'rare') return '#58a6ff';
+    return '#8b949e';
+}
+
 window.onload = function() {
     renderCollection();
 };
