@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Spider-Verse TCG - HÉRITAGE</title>
+    <title>Spider-Verse TCG</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,7 +19,7 @@
         <section id="collection" class="screen active">
             <div class="screen-header">
                 <h2>Collection Multivers</h2>
-                <span id="collection-count" class="counter">0 / 7</span>
+                <span id="collection-count" class="counter">0 / 30</span>
             </div>
             <div id="collection-grid" class="cards-grid"></div>
         </section>
@@ -29,20 +29,25 @@
             <h2>Arène des Dimensions</h2>
             <div class="arena-card">
                 <p>Affrontez les menaces du Multivers avec vos meilleurs tisseurs.</p>
-                <button class="marvel-btn secondary" onclick="alert('Le mode Arène arrive dans la prochaine mise à jour de combat !')">Lancer un Duel</button>
+                <button class="marvel-btn secondary" onclick="showModal('L\'Arène Multivers', 'Le système de combat est en cours de développement. Préparez votre deck !')">Lancer un Duel</button>
             </div>
         </section>
 
-        <!-- SECTION BOUTIQUE & BOOSTERS -->
+        <!-- SECTION BOUTIQUE -->
         <section id="quests" class="screen">
             <h2>Quartier Général</h2>
             <div class="booster-card-container">
                 <div class="booster-banner">
                     <h3>Booster Légendaire</h3>
-                    <p>3 cartes aléatoires garanties (Chance de Gold !)</p>
+                    <p>3 cartes. Taux : 60% C, 30% R, 8% G, 2% M.</p>
                 </div>
-                <button class="marvel-btn primary" onclick="openBooster()">Ouvrir un Booster (100 🕸️)</button>
+                <button id="open-btn" class="marvel-btn primary" onclick="openBooster()">Ouvrir (100 🕸️)</button>
             </div>
+            
+            <div id="booster-actions" style="display:none; text-align:center; margin-top:15px;">
+                <button class="marvel-btn secondary" onclick="clearBooster()">Réinitialiser le scanner</button>
+            </div>
+
             <div id="booster-result" class="booster-result-container"></div>
         </section>
     </main>
@@ -59,6 +64,15 @@
             <span class="icon">⚡</span><span>QG</span>
         </button>
     </nav>
+
+    <!-- MODAL CUSTOM (Remplace les alert() moches) -->
+    <div id="custom-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="modal-title">Titre</h3>
+            <p id="modal-text">Texte</p>
+            <button class="marvel-btn primary" onclick="closeModal()">Fermer</button>
+        </div>
+    </div>
 
     <script src="app.js"></script>
 </body>
