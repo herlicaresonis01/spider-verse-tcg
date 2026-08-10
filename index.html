@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Spider-Verse TCG</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header id="top-bar">
+        <div class="currency">🕸️ <span id="web-fragments">150</span></div>
+        <h1 class="app-title">HÉRITAGE</h1>
+    </header>
+
+    <main id="app-content">
+        <section id="collection" class="screen active">
+            <h2>Objets de Collection</h2>
+            <div id="collection-grid" class="grid-container"></div>
+        </section>
+
+        <section id="combat" class="screen">
+            <h2>Arène Multivers</h2>
+            <div id="battlefield"></div>
+        </section>
+
+        <section id="quests" class="screen">
+            <h2>Quêtes Journalières</h2>
+            <div class="booster-pack">
+                <h3>Booster MARVEL</h3>
+                <button id="open-booster-btn">Ouvrir (100 🕸️)</button>
+            </div>
+        </section>
+    </main>
+
+    <nav id="bottom-nav">
+        <button class="nav-btn active" onclick="switchTab('collection', this)">
+            <span class="icon">🎴</span><span>Cartes</span>
+        </button>
+        <button class="nav-btn" onclick="switchTab('combat', this)">
+            <span class="icon">⚔️</span><span>Combat</span>
+        </button>
+        <button class="nav-btn" onclick="switchTab('quests', this)">
+            <span class="icon">📜</span><span>Quêtes</span>
+        </button>
+    </nav>
+    <script src="app.js"></script>
+</body>
+</html>
