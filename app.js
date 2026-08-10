@@ -1,42 +1,80 @@
-let webFragments = 300; // On commence avec 300 pour tester un peu plus
+let webFragments = 500; // Un bon pécule pour tester la grosse base de données
 
-// Base de données de 30 cartes
+// MÉGA BASE DE DONNÉES (60 Cartes avec Variantes et Versions)
 const cardsDB = [
-    { id: 1, name: "Spider-Man (Tobey)", rarity: "rare", attack: 18, defense: 15 },
-    { id: 2, name: "Spider-Man (Andrew)", rarity: "rare", attack: 19, defense: 13 },
-    { id: 3, name: "Spider-Man (Tom)", rarity: "gold", attack: 22, defense: 20 },
-    { id: 4, name: "Miles Morales", rarity: "rare", attack: 20, defense: 16 },
-    { id: 5, name: "Gwen Stacy", rarity: "common", attack: 14, defense: 12 },
-    { id: 6, name: "Bouffon Vert", rarity: "gold", attack: 24, defense: 18 },
-    { id: 7, name: "Doctor Octopus", rarity: "rare", attack: 17, defense: 19 },
-    { id: 8, name: "Spider-Man 2099", rarity: "gold", attack: 25, defense: 22 },
-    { id: 9, name: "Spider-Punk", rarity: "rare", attack: 21, defense: 14 },
-    { id: 10, name: "Spider-Man Noir", rarity: "rare", attack: 18, defense: 18 },
-    { id: 11, name: "Peni Parker", rarity: "common", attack: 12, defense: 20 },
-    { id: 12, name: "Spider-Ham", rarity: "common", attack: 10, defense: 10 },
-    { id: 13, name: "Venom", rarity: "gold", attack: 26, defense: 24 },
-    { id: 14, name: "Carnage", rarity: "mythic", attack: 30, defense: 15 },
-    { id: 15, name: "Le Caïd", rarity: "rare", attack: 16, defense: 25 },
-    { id: 16, name: "Electro", rarity: "common", attack: 18, defense: 10 },
-    { id: 17, name: "L'Homme-Sable", rarity: "rare", attack: 15, defense: 22 },
-    { id: 18, name: "Mysterio", rarity: "rare", attack: 19, defense: 17 },
-    { id: 19, name: "Le Vautour", rarity: "common", attack: 15, defense: 14 },
-    { id: 20, name: "Kraven", rarity: "rare", attack: 20, defense: 15 },
-    { id: 21, name: "Le Lézard", rarity: "common", attack: 17, defense: 16 },
-    { id: 22, name: "Rhino", rarity: "rare", attack: 14, defense: 26 },
-    { id: 23, name: "La Tache (Spot)", rarity: "mythic", attack: 28, defense: 28 },
-    { id: 24, name: "Mary Jane", rarity: "common", attack: 5, defense: 5 },
-    { id: 25, name: "Tante May", rarity: "common", attack: 2, defense: 10 },
-    { id: 26, name: "Ned Leeds", rarity: "common", attack: 4, defense: 8 },
-    { id: 27, name: "Black Cat", rarity: "rare", attack: 18, defense: 12 },
-    { id: 28, name: "Silver Sable", rarity: "rare", attack: 17, defense: 16 },
-    { id: 29, name: "Symbiote Spidey", rarity: "gold", attack: 25, defense: 19 },
-    { id: 30, name: "Cosmic Spider-Man", rarity: "mythic", attack: 35, defense: 30 }
+    // --- SPIDER-MEN (TOBEY MAGUIRE) ---
+    { id: 1, name: "Spider-Man", version: "Costume Fait Maison (Tobey)", rarity: "common", attack: 10, defense: 12 },
+    { id: 2, name: "Spider-Man", version: "Héros de New York (Tobey)", rarity: "rare", attack: 18, defense: 15 },
+    { id: 3, name: "Spider-Man", version: "Costume Symbiote (Tobey)", rarity: "gold", attack: 24, defense: 18 },
+    
+    // --- SPIDER-MEN (ANDREW GARFIELD) ---
+    { id: 4, name: "Spider-Man", version: "Le Justicier (Andrew)", rarity: "common", attack: 12, defense: 10 },
+    { id: 5, name: "Spider-Man", version: "The Amazing (Andrew)", rarity: "rare", attack: 19, defense: 13 },
+    { id: 6, name: "Spider-Man", version: "Rage Perdue (Andrew)", rarity: "gold", attack: 23, defense: 12 },
+
+    // --- SPIDER-MEN (TOM HOLLAND) ---
+    { id: 7, name: "Spider-Man", version: "Stark Suit (Tom)", rarity: "rare", attack: 17, defense: 17 },
+    { id: 8, name: "Spider-Man", version: "Iron Spider (Tom)", rarity: "gold", attack: 22, defense: 25 },
+    { id: 9, name: "Spider-Man", version: "Costume Intégré (Tom)", rarity: "mythic", attack: 28, defense: 26 },
+
+    // --- AUTRES SPIDEYS DU MULTIVERS ---
+    { id: 10, name: "Miles Morales", version: "Graffeur de Brooklyn", rarity: "common", attack: 14, defense: 12 },
+    { id: 11, name: "Miles Morales", version: "Into the Spider-Verse", rarity: "rare", attack: 20, defense: 16 },
+    { id: 12, name: "Gwen Stacy", version: "Spider-Gwen", rarity: "rare", attack: 18, defense: 19 },
+    { id: 13, name: "Spider-Man 2099", version: "Miguel O'Hara", rarity: "gold", attack: 26, defense: 22 },
+    { id: 14, name: "Spider-Punk", version: "Hobie Brown", rarity: "rare", attack: 21, defense: 14 },
+    { id: 15, name: "Spider-Man Noir", version: "Détective des années 30", rarity: "rare", attack: 18, defense: 18 },
+    { id: 16, name: "Cosmic Spider-Man", version: "Capitaine Univers", rarity: "mythic", attack: 35, defense: 30 },
+
+    // --- VENOM (MULTI-RARETÉS) ---
+    { id: 17, name: "Venom", version: "Hôte Imparfait", rarity: "common", attack: 16, defense: 15 },
+    { id: 18, name: "Venom", version: "Protecteur Létal", rarity: "rare", attack: 22, defense: 20 },
+    { id: 19, name: "Venom", version: "Eddie Brock (Film)", rarity: "gold", attack: 26, defense: 24 },
+    { id: 20, name: "Venom", version: "Roi en Noir", rarity: "mythic", attack: 32, defense: 28 },
+
+    // --- VILAINS (ÈRE TOBEY) ---
+    { id: 21, name: "Bouffon Vert", version: "Norman Osborn", rarity: "gold", attack: 25, defense: 18 },
+    { id: 22, name: "Doctor Octopus", version: "Otto Octavius", rarity: "rare", attack: 19, defense: 22 },
+    { id: 23, name: "L'Homme-Sable", version: "Flint Marko", rarity: "rare", attack: 15, defense: 25 },
+    { id: 24, name: "Nouveau Bouffon", version: "Harry Osborn", rarity: "rare", attack: 20, defense: 16 },
+
+    // --- VILAINS (ÈRE ANDREW) ---
+    { id: 25, name: "Le Lézard", version: "Dr. Connors", rarity: "rare", attack: 21, defense: 18 },
+    { id: 26, name: "Electro", version: "Maxwell Dillon", rarity: "gold", attack: 27, defense: 15 },
+    { id: 27, name: "Rhino", version: "Armure Mécanique", rarity: "common", attack: 18, defense: 25 },
+
+    // --- VILAINS (ÈRE TOM) ---
+    { id: 28, name: "Le Vautour", version: "Adrian Toomes", rarity: "rare", attack: 18, defense: 18 },
+    { id: 29, name: "Mysterio", version: "Maître des Illusions", rarity: "gold", attack: 24, defense: 14 },
+    { id: 30, name: "Shocker", version: "Herman Schultz", rarity: "common", attack: 15, defense: 12 },
+
+    // --- AUTRES VILAINS ET SYMBIOTES ICONIQUES ---
+    { id: 31, name: "Carnage", version: "Cletus Kasady", rarity: "mythic", attack: 30, defense: 15 },
+    { id: 32, name: "Le Caïd", version: "Wilson Fisk", rarity: "gold", attack: 22, defense: 28 },
+    { id: 33, name: "La Tache", version: "Anomalie Multiverselle", rarity: "mythic", attack: 28, defense: 28 },
+    { id: 34, name: "Kraven", version: "Le Chasseur", rarity: "rare", attack: 23, defense: 16 },
+    { id: 35, name: "Le Rôdeur", version: "Aaron Davis", rarity: "rare", attack: 19, defense: 17 },
+    { id: 36, name: "Morbius", version: "Vampire Vivant", rarity: "rare", attack: 20, defense: 19 },
+    { id: 37, name: "Scorpion", version: "Mac Gargan", rarity: "common", attack: 17, defense: 14 },
+    { id: 38, name: "Tombstone", version: "Peau Impénétrable", rarity: "common", attack: 15, defense: 22 },
+    { id: 39, name: "Mr. Negative", version: "Martin Li", rarity: "gold", attack: 24, defense: 20 },
+
+    // --- ALLIÉS ET CIVILS ---
+    { id: 40, name: "MJ", version: "Kirsten Dunst", rarity: "common", attack: 2, defense: 5 },
+    { id: 41, name: "Zendaya (MJ)", version: "Michelle Jones", rarity: "common", attack: 4, defense: 8 },
+    { id: 42, name: "Ned Leeds", version: "Le Gars de la Chaise", rarity: "common", attack: 3, defense: 10 },
+    { id: 43, name: "Tante May", version: "Sagesse Éternelle", rarity: "common", attack: 0, defense: 15 },
+    { id: 44, name: "J. Jonah Jameson", version: "Daily Bugle", rarity: "common", attack: 10, defense: 5 },
+    { id: 45, name: "Black Cat", version: "Felicia Hardy", rarity: "rare", attack: 19, defense: 15 },
+    { id: 46, name: "Silver Sable", version: "Mercenaire", rarity: "rare", attack: 18, defense: 16 },
+    { id: 47, name: "Capitaine Stacy", version: "NYPD", rarity: "common", attack: 12, defense: 14 },
+    { id: 48, name: "Madame Web", version: "Voyante du Tissu", rarity: "gold", attack: 10, defense: 25 },
+    { id: 49, name: "Agent Venom", version: "Flash Thompson", rarity: "gold", attack: 24, defense: 22 },
+    { id: 50, name: "Iron Man", version: "Mentor de Peter", rarity: "mythic", attack: 28, defense: 25 }
 ];
 
-let playerCollection = [1, 5]; // Tobey et Gwen par défaut
+let playerCollection = [1, 4, 42]; // Commence avec Tobey(C), Andrew(C) et Ned(C)
 
-// Gestion des UI
 function switchTab(tabId, btn) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(tabId).classList.add('active');
@@ -49,12 +87,16 @@ function renderCollection() {
     const grid = document.getElementById('collection-grid');
     grid.innerHTML = '';
 
-    cardsDB.forEach(card => {
+    // Trier la collection pour afficher par ID (les Spideys ensemble, vilains ensemble...)
+    const sortedCards = [...cardsDB].sort((a, b) => a.id - b.id);
+
+    sortedCards.forEach(card => {
         const isOwned = playerCollection.includes(card.id);
         const cardDiv = document.createElement('div');
         cardDiv.className = `card ${card.rarity} ${isOwned ? '' : 'locked'}`;
         cardDiv.innerHTML = `
             <h4>${isOwned ? card.name : "???"}</h4>
+            <div class="card-version">${isOwned ? card.version : "Donnée Inconnue"}</div>
             <div class="stats">${isOwned ? `ATK: ${card.attack} | DEF: ${card.defense}` : "🔒 Verrouillé"}</div>
             <div class="rarity-tag" style="color: ${cardRarityColor(card.rarity)}">${card.rarity}</div>
         `;
@@ -65,7 +107,6 @@ function renderCollection() {
     document.getElementById('collection-count').innerText = `${playerCollection.length} / ${cardsDB.length}`;
 }
 
-// Custom Modal au lieu des alert()
 function showModal(title, text) {
     document.getElementById('modal-title').innerText = title;
     document.getElementById('modal-text').innerText = text;
@@ -76,7 +117,6 @@ function closeModal() {
     document.getElementById('custom-modal').classList.remove('active');
 }
 
-// Mise à jour de la monnaie avec petit effet visuel
 function updateFragmentsUI() {
     const fragEl = document.getElementById('web-fragments');
     fragEl.innerText = webFragments;
@@ -84,30 +124,27 @@ function updateFragmentsUI() {
     setTimeout(() => fragEl.parentElement.classList.remove('bump'), 200);
 }
 
-// Algorithme de Gacha (Drop Rates)
 function pullRandomCard() {
     const rand = Math.random() * 100;
     let targetRarity;
     
-    // Taux : 60% Common, 30% Rare, 8% Gold, 2% Mythic
+    // Taux de Drop Gacha
     if (rand < 60) targetRarity = "common";
     else if (rand < 90) targetRarity = "rare";
     else if (rand < 98) targetRarity = "gold";
     else targetRarity = "mythic";
 
     const pool = cardsDB.filter(c => c.rarity === targetRarity);
-    if(pool.length === 0) return cardsDB[Math.floor(Math.random() * cardsDB.length)]; // Securité
+    if(pool.length === 0) return cardsDB[Math.floor(Math.random() * cardsDB.length)];
     return pool[Math.floor(Math.random() * pool.length)];
 }
 
-// Ouverture Cinématique
 function openBooster() {
     if (webFragments < 100) {
         showModal("Fonds Insuffisants", "Vous n'avez pas assez de Fragments de Toile (100 requis).");
         return;
     }
 
-    // Animation du bouton
     const btn = document.getElementById('open-btn');
     btn.classList.add('shaking');
     setTimeout(() => btn.classList.remove('shaking'), 400);
@@ -116,7 +153,7 @@ function openBooster() {
     updateFragmentsUI();
 
     const resultDiv = document.getElementById('booster-result');
-    resultDiv.innerHTML = `<h3 style="color:#f0f6fc; margin-bottom:15px; font-size:1.1rem; text-align:center;">Ouverture en cours...</h3>`;
+    resultDiv.innerHTML = `<h3 style="color:#f0f6fc; margin-bottom:15px; font-size:1.1rem; text-align:center;">Scanner Multiversel en cours...</h3>`;
     
     let subGrid = document.createElement('div');
     subGrid.className = 'cards-grid';
@@ -124,19 +161,16 @@ function openBooster() {
 
     document.getElementById('booster-actions').style.display = 'none';
 
-    // Tirer 3 cartes
     let pulledCards = [pullRandomCard(), pullRandomCard(), pullRandomCard()];
     let totalScrap = 0;
 
-    // Apparition carte par carte (Cinématique)
     pulledCards.forEach((c, index) => {
         setTimeout(() => {
             let isDuplicate = playerCollection.includes(c.id);
             let dupMsg = "";
 
             if (isDuplicate) {
-                // Système de recyclage des doublons
-                let scrap = c.rarity === 'common' ? 10 : (c.rarity === 'rare' ? 25 : (c.rarity === 'gold' ? 50 : 100));
+                let scrap = c.rarity === 'common' ? 10 : (c.rarity === 'rare' ? 25 : (c.rarity === 'gold' ? 60 : 150));
                 totalScrap += scrap;
                 dupMsg = `<div class="dup-msg">Doublon ! +${scrap} 🕸️</div>`;
             } else {
@@ -144,15 +178,15 @@ function openBooster() {
             }
 
             subGrid.innerHTML += `
-                <div class="card ${c.rarity} revealed" style="animation-delay: 0s;">
+                <div class="card ${c.rarity} revealed">
                     <h4>${c.name}</h4>
+                    <div class="card-version">${c.version}</div>
                     <div class="stats">ATK: ${c.attack} | DEF: ${c.defense}</div>
                     <div class="rarity-tag" style="color: ${cardRarityColor(c.rarity)}">${c.rarity}</div>
                     ${dupMsg}
                 </div>
             `;
 
-            // Si c'est la dernière carte, on met à jour les fragments gagnés via doublons
             if (index === 2) {
                 setTimeout(() => {
                     if(totalScrap > 0) {
@@ -162,10 +196,10 @@ function openBooster() {
                     }
                     document.getElementById('booster-actions').style.display = 'block';
                     renderCollection();
-                }, 800); // Attendre un peu après la dernière carte
+                }, 800);
             }
 
-        }, (index + 1) * 600); // 600ms entre chaque carte
+        }, (index + 1) * 600);
     });
 }
 
