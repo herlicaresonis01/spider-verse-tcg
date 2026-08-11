@@ -87,16 +87,26 @@ function renderCollection() {
     const grid = document.getElementById('collection-grid');
     grid.innerHTML = '';
 
-    // Trier la collection pour afficher par ID (les Spideys ensemble, vilains ensemble...)
     const sortedCards = [...cardsDB].sort((a, b) => a.id - b.id);
 
     sortedCards.forEach(card => {
         const isOwned = playerCollection.includes(card.id);
+        
+        // Chemins des images
+        const imgSrc = `images/${card.id}.png`;
+        const placeholderImg = `https://via.placeholder.com/150x130/161b22/8b949e?text=ID+${card.id}`;
+
         const cardDiv = document.createElement('div');
         cardDiv.className = `card ${card.rarity} ${isOwned ? '' : 'locked'}`;
+        
         cardDiv.innerHTML = `
-            <h4>${isOwned ? card.name : "???"}</h4>
-            <div class="card-version">${isOwned ? card.version : "Donnée Inconnue"}</div>
+            <div class="card-image-container">
+                <img src="${isOwned ? imgSrc : placeholderImg}" onerror="this.src='${placeholderImg}'">
+            </div>
+            <div>
+                <h4>${isOwned ? card.name : "???"}</h4>
+                <div class="card-version">${isOwned ? card.version : "Donnée Inconnue"}</div>
+            </div>
             <div class="stats">${isOwned ? `ATK: ${card.attack} | DEF: ${card.defense}` : "🔒 Verrouillé"}</div>
             <div class="rarity-tag" style="color: ${cardRarityColor(card.rarity)}">${card.rarity}</div>
         `;
@@ -128,7 +138,6 @@ function pullRandomCard() {
     const rand = Math.random() * 100;
     let targetRarity;
     
-    // Taux de Drop Gacha
     if (rand < 60) targetRarity = "common";
     else if (rand < 90) targetRarity = "rare";
     else if (rand < 98) targetRarity = "gold";
@@ -153,7 +162,7 @@ function openBooster() {
     updateFragmentsUI();
 
     const resultDiv = document.getElementById('booster-result');
-    resultDiv.innerHTML = `<h3 style="color:#f0f6fc; margin-bottom:15px; font-size:1.1rem; text-align:center;">Scanner Multiversel en cours...</h3>`;
+    resultDiv.innerHTML = `<h3 style="color:#f0f6fc; margin:15px 0 10px 0; font-size:1.1rem; text-align:center;">Scanner Multiversel en cours...</h3>`;
     
     let subGrid = document.createElement('div');
     subGrid.className = 'cards-grid';
@@ -177,10 +186,18 @@ function openBooster() {
                 playerCollection.push(c.id);
             }
 
+            const imgSrc = `images/${c.id}.png`;
+            const placeholderImg = `https://via.placeholder.com/150x130/161b22/8b949e?text=ID+${c.id}`;
+
             subGrid.innerHTML += `
                 <div class="card ${c.rarity} revealed">
-                    <h4>${c.name}</h4>
-                    <div class="card-version">${c.version}</div>
+                    <div class="card-image-container">
+                        <img src="${imgSrc}" onerror="this.src='${placeholderImg}'">
+                    </div>
+                    <div>
+                        <h4>${c.name}</h4>
+                        <div class="card-version">${c.version}</div>
+                    </div>
                     <div class="stats">ATK: ${c.attack} | DEF: ${c.defense}</div>
                     <div class="rarity-tag" style="color: ${cardRarityColor(c.rarity)}">${c.rarity}</div>
                     ${dupMsg}
