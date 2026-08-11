@@ -21,17 +21,21 @@ h2 { font-size: 1.3rem; color: #f0f6fc; }
 
 .cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
 
-.card { background: linear-gradient(145deg, #161b22, #0d1117); border-radius: 14px; padding: 16px 8px; text-align: center; position: relative; border: 2px solid #30363d; box-shadow: 0 6px 15px rgba(0,0,0,0.5); display: flex; flex-direction: column; justify-content: space-between; }
+.card { background: linear-gradient(145deg, #161b22, #0d1117); border-radius: 14px; padding: 12px 8px; text-align: center; position: relative; border: 2px solid #30363d; box-shadow: 0 6px 15px rgba(0,0,0,0.5); display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
 .card.locked { opacity: 0.35; filter: grayscale(100%); border-color: #21262d; }
 .card.common { border-color: #8b949e; }
 .card.rare { border-color: #58a6ff; box-shadow: 0 0 12px rgba(88, 166, 255, 0.25); }
 .card.gold { border-color: #f0883e; background: linear-gradient(145deg, #1f1a17, #0d1117); box-shadow: 0 0 20px rgba(240, 136, 62, 0.4); }
 .card.mythic { border-color: #ff0055; background: linear-gradient(145deg, #2a0a18, #0d1117); box-shadow: 0 0 25px rgba(255, 0, 85, 0.6); }
 
-.card h4 { font-size: 1rem; margin-bottom: 2px; color: #ffffff; font-weight: 800; line-height: 1.1; }
-.card-version { font-size: 0.7rem; color: #a1b0c0; font-style: italic; margin-bottom: 8px; min-height: 24px; }
+/* Conteneur et Image de la carte */
+.card-image-container { width: 100%; height: 130px; background-color: #0b0f15; border-radius: 8px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
+.card-image-container img { width: 100%; height: 100%; object-fit: cover; }
+
+.card h4 { font-size: 0.95rem; margin-bottom: 2px; color: #ffffff; font-weight: 800; line-height: 1.1; }
+.card-version { font-size: 0.65rem; color: #a1b0c0; font-style: italic; margin-bottom: 6px; min-height: 20px; }
 .card .stats { font-size: 0.75rem; color: #8b949e; margin-top: auto; font-weight: 600; padding-top: 5px; border-top: 1px solid rgba(255,255,255,0.1); }
-.rarity-tag { display: inline-block; margin-top: 6px; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; padding: 2px 6px; border-radius: 4px; background: rgba(255,255,255,0.05); }
+.rarity-tag { display: inline-block; margin-top: 5px; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; padding: 2px 6px; border-radius: 4px; background: rgba(255,255,255,0.05); }
 
 /* Animations Cinématiques Booster */
 @keyframes flipReveal {
@@ -71,4 +75,4 @@ nav { position: fixed; bottom: 0; width: 100%; background: rgba(13, 17, 23, 0.95
 .modal-overlay.active .modal-content { transform: scale(1); }
 .modal-content h3 { color: #ff7b72; margin-bottom: 10px; font-size: 1.3rem; }
 .modal-content p { color: #c9d1d9; margin-bottom: 20px; font-size: 0.95rem; line-height: 1.4; }
-.dup-msg { color: #58a6ff; font-size: 0.8rem; margin-top: 5px; font-weight: bold; }
+.dup-msg { color: #58a6ff; font-size: 0.8rem; margin-top: 5px; font-weight: bold; } 
