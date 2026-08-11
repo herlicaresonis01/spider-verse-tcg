@@ -92,16 +92,17 @@ function renderCollection() {
     sortedCards.forEach(card => {
         const isOwned = playerCollection.includes(card.id);
         
-        // Chemins des images
-        const imgSrc = `images/${card.id}.png`;
-        const placeholderImg = `https://via.placeholder.com/150x130/161b22/8b949e?text=ID+${card.id}`;
+        // Chemins intelligents : Tente le PNG, sinon bascule sur le JPG, sinon placeholder
+        const imgSrcPng = `images/${card.id}.png`;
+        const imgSrcJpg = `images/${card.id}.jpg`;
+        const placeholderImg = `https://via.placeholder.com/150x190/161b22/8b949e?text=ID+${card.id}`;
 
         const cardDiv = document.createElement('div');
         cardDiv.className = `card ${card.rarity} ${isOwned ? '' : 'locked'}`;
         
         cardDiv.innerHTML = `
             <div class="card-image-container">
-                <img src="${isOwned ? imgSrc : placeholderImg}" onerror="this.src='${placeholderImg}'">
+                <img src="${isOwned ? imgSrcPng : placeholderImg}" onerror="this.onerror=null; this.src='${imgSrcJpg}'; this.onerror=function(){this.src='${placeholderImg}';};">
             </div>
             <div>
                 <h4>${isOwned ? card.name : "???"}</h4>
@@ -186,13 +187,14 @@ function openBooster() {
                 playerCollection.push(c.id);
             }
 
-            const imgSrc = `images/${c.id}.png`;
-            const placeholderImg = `https://via.placeholder.com/150x130/161b22/8b949e?text=ID+${c.id}`;
+            const imgSrcPng = `images/${c.id}.png`;
+            const imgSrcJpg = `images/${c.id}.jpg`;
+            const placeholderImg = `https://via.placeholder.com/150x190/161b22/8b949e?text=ID+${c.id}`;
 
             subGrid.innerHTML += `
                 <div class="card ${c.rarity} revealed">
                     <div class="card-image-container">
-                        <img src="${imgSrc}" onerror="this.src='${placeholderImg}'">
+                        <img src="${imgSrcPng}" onerror="this.onerror=null; this.src='${imgSrcJpg}'; this.onerror=function(){this.src='${placeholderImg}';};">
                     </div>
                     <div>
                         <h4>${c.name}</h4>
