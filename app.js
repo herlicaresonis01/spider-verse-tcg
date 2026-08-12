@@ -1,23 +1,16 @@
-let webFragments = 500; // Un bon pécule pour tester la grosse base de données
+let webFragments = 500;
 
-// MÉGA BASE DE DONNÉES (60 Cartes avec Variantes et Versions)
+// MÉGA BASE DE DONNÉES (50 Cartes)
 const cardsDB = [
-    // --- SPIDER-MEN (TOBEY MAGUIRE) ---
     { id: 1, name: "Spider-Man", version: "Costume Fait Maison (Tobey)", rarity: "common", attack: 10, defense: 12 },
     { id: 2, name: "Spider-Man", version: "Héros de New York (Tobey)", rarity: "rare", attack: 18, defense: 15 },
     { id: 3, name: "Spider-Man", version: "Costume Symbiote (Tobey)", rarity: "gold", attack: 24, defense: 18 },
-    
-    // --- SPIDER-MEN (ANDREW GARFIELD) ---
     { id: 4, name: "Spider-Man", version: "Le Justicier (Andrew)", rarity: "common", attack: 12, defense: 10 },
     { id: 5, name: "Spider-Man", version: "The Amazing (Andrew)", rarity: "rare", attack: 19, defense: 13 },
     { id: 6, name: "Spider-Man", version: "Rage Perdue (Andrew)", rarity: "gold", attack: 23, defense: 12 },
-
-    // --- SPIDER-MEN (TOM HOLLAND) ---
     { id: 7, name: "Spider-Man", version: "Stark Suit (Tom)", rarity: "rare", attack: 17, defense: 17 },
     { id: 8, name: "Spider-Man", version: "Iron Spider (Tom)", rarity: "gold", attack: 22, defense: 25 },
     { id: 9, name: "Spider-Man", version: "Costume Intégré (Tom)", rarity: "mythic", attack: 28, defense: 26 },
-
-    // --- AUTRES SPIDEYS DU MULTIVERS ---
     { id: 10, name: "Miles Morales", version: "Graffeur de Brooklyn", rarity: "common", attack: 14, defense: 12 },
     { id: 11, name: "Miles Morales", version: "Into the Spider-Verse", rarity: "rare", attack: 20, defense: 16 },
     { id: 12, name: "Gwen Stacy", version: "Spider-Gwen", rarity: "rare", attack: 18, defense: 19 },
@@ -25,30 +18,20 @@ const cardsDB = [
     { id: 14, name: "Spider-Punk", version: "Hobie Brown", rarity: "rare", attack: 21, defense: 14 },
     { id: 15, name: "Spider-Man Noir", version: "Détective des années 30", rarity: "rare", attack: 18, defense: 18 },
     { id: 16, name: "Cosmic Spider-Man", version: "Capitaine Univers", rarity: "mythic", attack: 35, defense: 30 },
-
-    // --- VENOM (MULTI-RARETÉS) ---
     { id: 17, name: "Venom", version: "Hôte Imparfait", rarity: "common", attack: 16, defense: 15 },
     { id: 18, name: "Venom", version: "Protecteur Létal", rarity: "rare", attack: 22, defense: 20 },
     { id: 19, name: "Venom", version: "Eddie Brock (Film)", rarity: "gold", attack: 26, defense: 24 },
     { id: 20, name: "Venom", version: "Roi en Noir", rarity: "mythic", attack: 32, defense: 28 },
-
-    // --- VILAINS (ÈRE TOBEY) ---
     { id: 21, name: "Bouffon Vert", version: "Norman Osborn", rarity: "gold", attack: 25, defense: 18 },
     { id: 22, name: "Doctor Octopus", version: "Otto Octavius", rarity: "rare", attack: 19, defense: 22 },
     { id: 23, name: "L'Homme-Sable", version: "Flint Marko", rarity: "rare", attack: 15, defense: 25 },
     { id: 24, name: "Nouveau Bouffon", version: "Harry Osborn", rarity: "rare", attack: 20, defense: 16 },
-
-    // --- VILAINS (ÈRE ANDREW) ---
     { id: 25, name: "Le Lézard", version: "Dr. Connors", rarity: "rare", attack: 21, defense: 18 },
     { id: 26, name: "Electro", version: "Maxwell Dillon", rarity: "gold", attack: 27, defense: 15 },
     { id: 27, name: "Rhino", version: "Armure Mécanique", rarity: "common", attack: 18, defense: 25 },
-
-    // --- VILAINS (ÈRE TOM) ---
     { id: 28, name: "Le Vautour", version: "Adrian Toomes", rarity: "rare", attack: 18, defense: 18 },
     { id: 29, name: "Mysterio", version: "Maître des Illusions", rarity: "gold", attack: 24, defense: 14 },
     { id: 30, name: "Shocker", version: "Herman Schultz", rarity: "common", attack: 15, defense: 12 },
-
-    // --- AUTRES VILAINS ET SYMBIOTES ICONIQUES ---
     { id: 31, name: "Carnage", version: "Cletus Kasady", rarity: "mythic", attack: 30, defense: 15 },
     { id: 32, name: "Le Caïd", version: "Wilson Fisk", rarity: "gold", attack: 22, defense: 28 },
     { id: 33, name: "La Tache", version: "Anomalie Multiverselle", rarity: "mythic", attack: 28, defense: 28 },
@@ -58,8 +41,6 @@ const cardsDB = [
     { id: 37, name: "Scorpion", version: "Mac Gargan", rarity: "common", attack: 17, defense: 14 },
     { id: 38, name: "Tombstone", version: "Peau Impénétrable", rarity: "common", attack: 15, defense: 22 },
     { id: 39, name: "Mr. Negative", version: "Martin Li", rarity: "gold", attack: 24, defense: 20 },
-
-    // --- ALLIÉS ET CIVILS ---
     { id: 40, name: "MJ", version: "Kirsten Dunst", rarity: "common", attack: 2, defense: 5 },
     { id: 41, name: "Zendaya (MJ)", version: "Michelle Jones", rarity: "common", attack: 4, defense: 8 },
     { id: 42, name: "Ned Leeds", version: "Le Gars de la Chaise", rarity: "common", attack: 3, defense: 10 },
@@ -73,7 +54,23 @@ const cardsDB = [
     { id: 50, name: "Iron Man", version: "Mentor de Peter", rarity: "mythic", attack: 28, defense: 25 }
 ];
 
-let playerCollection = [1, 4, 42]; // Commence avec Tobey(C), Andrew(C) et Ned(C)
+let playerCollection = [1, 4, 28, 38, 42]; // J'ai ajouté Vautour et Tombstone pour que tu puisses tester direct
+
+// --- LA FONCTION MAGIQUE QUI TESTE TOUTES LES EXTENSIONS ---
+function getSmartImageTag(id, isOwned) {
+    const fallback = `https://via.placeholder.com/150x190/161b22/8b949e?text=ID+${id}`;
+    if (!isOwned) return `<img src="${fallback}">`;
+    
+    // Tente png -> jpg -> jpeg -> webp -> JPG majuscule -> fallback
+    return `<img src="images/${id}.png" 
+        onerror="this.onerror=null; 
+        this.src='images/${id}.jpg'; 
+        this.onerror=function(){ this.src='images/${id}.jpeg'; 
+        this.onerror=function(){ this.src='images/${id}.webp'; 
+        this.onerror=function(){ this.src='images/${id}.JPG'; 
+        this.onerror=function(){ this.src='${fallback}'; 
+        }; }; }; };">`;
+}
 
 function switchTab(tabId, btn) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -86,23 +83,16 @@ function switchTab(tabId, btn) {
 function renderCollection() {
     const grid = document.getElementById('collection-grid');
     grid.innerHTML = '';
-
     const sortedCards = [...cardsDB].sort((a, b) => a.id - b.id);
 
     sortedCards.forEach(card => {
         const isOwned = playerCollection.includes(card.id);
-        
-        // Chemins intelligents : Tente le PNG, sinon bascule sur le JPG, sinon placeholder
-        const imgSrcPng = `images/${card.id}.png`;
-        const imgSrcJpg = `images/${card.id}.jpg`;
-        const placeholderImg = `https://via.placeholder.com/150x190/161b22/8b949e?text=ID+${card.id}`;
-
         const cardDiv = document.createElement('div');
         cardDiv.className = `card ${card.rarity} ${isOwned ? '' : 'locked'}`;
         
         cardDiv.innerHTML = `
             <div class="card-image-container">
-                <img src="${isOwned ? imgSrcPng : placeholderImg}" onerror="this.onerror=null; this.src='${imgSrcJpg}'; this.onerror=function(){this.src='${placeholderImg}';};">
+                ${getSmartImageTag(card.id, isOwned)}
             </div>
             <div>
                 <h4>${isOwned ? card.name : "???"}</h4>
@@ -137,16 +127,9 @@ function updateFragmentsUI() {
 
 function pullRandomCard() {
     const rand = Math.random() * 100;
-    let targetRarity;
-    
-    if (rand < 60) targetRarity = "common";
-    else if (rand < 90) targetRarity = "rare";
-    else if (rand < 98) targetRarity = "gold";
-    else targetRarity = "mythic";
-
+    let targetRarity = rand < 60 ? "common" : rand < 90 ? "rare" : rand < 98 ? "gold" : "mythic";
     const pool = cardsDB.filter(c => c.rarity === targetRarity);
-    if(pool.length === 0) return cardsDB[Math.floor(Math.random() * cardsDB.length)];
-    return pool[Math.floor(Math.random() * pool.length)];
+    return pool.length === 0 ? cardsDB[Math.floor(Math.random() * cardsDB.length)] : pool[Math.floor(Math.random() * pool.length)];
 }
 
 function openBooster() {
@@ -187,14 +170,10 @@ function openBooster() {
                 playerCollection.push(c.id);
             }
 
-            const imgSrcPng = `images/${c.id}.png`;
-            const imgSrcJpg = `images/${c.id}.jpg`;
-            const placeholderImg = `https://via.placeholder.com/150x190/161b22/8b949e?text=ID+${c.id}`;
-
             subGrid.innerHTML += `
                 <div class="card ${c.rarity} revealed">
                     <div class="card-image-container">
-                        <img src="${imgSrcPng}" onerror="this.onerror=null; this.src='${imgSrcJpg}'; this.onerror=function(){this.src='${placeholderImg}';};">
+                        ${getSmartImageTag(c.id, true)}
                     </div>
                     <div>
                         <h4>${c.name}</h4>
@@ -217,7 +196,6 @@ function openBooster() {
                     renderCollection();
                 }, 800);
             }
-
         }, (index + 1) * 600);
     });
 }
@@ -234,6 +212,4 @@ function cardRarityColor(rarity) {
     return '#8b949e';
 }
 
-window.onload = function() {
-    renderCollection();
-};
+window.onload = renderCollection;
